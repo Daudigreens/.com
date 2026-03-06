@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daudi Greens Foundation (DGF)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --secondary: #4caf50;
+            --light-bg: #f7f9f6;
+            --text-dark: #333;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Poppins', sans-serif; background: var(--light-bg); color: var(--text-dark); overflow-x: hidden; }
+
+        /* --- Navbar --- */
+        header { position: sticky; top:0; z-index:1000; background:white; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 15px rgba(0,0,0,0.05); }
+        
+        .logo { display:flex; align-items:center; font-weight:800; font-size:1.4rem; color: var(--primary); text-decoration:none; gap:10px; }
+        .logo-icon { width: 40px; height: 40px; background: #e8f5e9; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary); color: var(--primary); }
+        
+        nav ul { list-style:none; display:flex; gap:2rem; align-items: center; }
+        nav ul li a { text-decoration:none; color:#555; font-weight:600; transition: 0.3s; font-size: 0.95rem; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); }
+
+        /* --- Mobile Nav Enhancement --- */
+        .mobile-logo { display: none; margin-bottom: 2rem; }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex !important; }
+            nav ul { 
+                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; 
+                background: white; flex-direction: column; justify-content: flex-start; padding-top: 5rem;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s ease; 
+            }
+            nav ul.show { right: 0; }
+            .mobile-logo { display: flex; }
+        }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1100; }
+        .hamburger span { width: 28px; height: 3px; background: var(--primary); border-radius: 2px; transition: 0.3s; }
+
+        /* --- Hero (Showcase) --- */
+        .hero { 
+            display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; 
+            padding:10rem 2rem; 
+            /* Lightened overlay: from 0.8 to 0.4 opacity for clarity */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1600&q=80'); 
+            background-size: cover; background-position: center; color:white; 
+        }
+        .hero h1 { font-size:clamp(2rem, 5vw, 3.5rem); margin-bottom:1rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size:1.2rem; max-width:700px; margin-bottom:2.5rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.5); }
+        
+        .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn { padding:0.9rem 2.2rem; border-radius:50px; font-weight:700; text-decoration:none; transition: 0.3s; border: 2px solid transparent; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--secondary); }
+        .btn-outline { background: rgba(255,255,255,0.1); color: white; border-color: white; backdrop-filter: blur(5px); }
+        .btn-outline:hover { background: white; color: var(--primary); }
+
+        /* --- Sections Shared --- */
+        section { padding: 5rem 2rem; }
+        .section-title { text-align:center; margin-bottom:3rem; color: var(--primary); }
+        .container { max-width: 1100px; margin: auto; }
+
+        /* --- Content Blocks --- */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); }
+        .card i { color: var(--secondary); margin-bottom: 1rem; }
+
+        /* --- Stats Bar --- */
+        .stats-bar { background: var(--primary); color: white; text-align: center; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .stat-item h2 { font-size: 2.5rem; }
+
+        /* --- Carousel --- */
+        .carousel-container { padding: 4rem 1rem; background: #fff; }
+        .swiper { width: 100%; height: 450px; border-radius: 20px; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; }
+
+        /* --- Footer --- */
+        footer { background: var(--primary); color:white; padding:4rem 2rem; }
+        .footer-container { max-width:1100px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:3rem; }
+        .footer-link { color:#e8f5e9; text-decoration:none; display:flex; align-items:center; gap:8px; margin-bottom: 12px; }
+        .social-icons { display: flex; gap: 12px; margin-top: 15px; }
+        .social-circle { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: 0.3s; }
+        .social-circle:hover { background: var(--secondary); }
+
+        /* WhatsApp */
+        .whatsapp-btn { position:fixed; bottom:25px; right:25px; background:#25d366; color:white; padding:12px 25px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 5px 20px rgba(0,0,0,0.2); z-index: 1001; display:flex; align-items:center; gap:8px; }
+    </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon"><i data-lucide="leaf"></i></div>
+    <span>DAUDI <span style="color:var(--secondary);">GREENS</span></span>
+  </a>
+
+  <nav>
+    <ul id="nav-links">
+      <li class="mobile-logo">
+        <div class="logo">
+            <div class="logo-icon"><i data-lucide="leaf"></i></div>
+            <span>DAUDI <span style="color:var(--secondary);">GREENS</span></span>
+        </div>
+      </li>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Welcome To Daudi Greens Foundation (DGF)</h1>
+  <p>Daudi Greens Foundation (DGF) Is home of cost effective & highly profitable productivity, modern and practical Agricultire. My  aim is to empower communities through sustainabe farming, environmental conservation and knowledge about Green initives</p>
+  <div class="hero-btns">
+    <a href="contact.html" class="btn btn-primary">Our Programs</a>
+    <a href="about.html" class="btn btn-outline">Learn More</a>
+  </div>
+</section>
+
+<section class="stats-bar">
+    <div class="stat-item">
+        <h2 class="counter">50k+</h2>
+        <p>Trees Planted</p>
+    </div>
+    <div class="stat-item">
+        <h2 class="counter">1.2k</h2>
+        <p>Farmers Trained</p>
+    </div>
+    <div class="stat-item">
+        <h2 class="counter">15</h2>
+        <p>Counties Reached</p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="grid-3" style="align-items: center;">
+        <div>
+            <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&w=600" alt="Farming" style="width:100%; border-radius:20px; box-shadow: 20px 20px 0px var(--secondary);">
+        </div>
+        <div style="grid-column: span 2;">
+            <h2 style="color:var(--primary); margin-bottom:1rem;">Who We Are</h2>
+            <p style="line-height:1.8; color:#666; margin-bottom:1.5rem;">
+                Founded on the principles of ecological integrity and community empowerment, Daudi Greens Foundation (DGF) works at the intersection of environmental conservation and modern agriculture. We believe that by teaching sustainable techniques, we can ensure food security while protecting our planet's future.
+            </p>
+            <a href="about.html" style="color:var(--primary); font-weight:700; text-decoration:none;">Read Our Full Story →</a>
+        </div>
+    </div>
+</section>
+
+<section style="background:#f0f4f0;">
+    <div class="container">
+        <h2 class="section-title">Our Core Pillars</h2>
+        <div class="grid-3">
+            <div class="card">
+                <i data-lucide="sprout" size="40"></i>
+                <h3>Afforestation</h3>
+                <p>Restoring Kenya's water towers through aggressive tree planting and community-led nursery management.</p>
+            </div>
+            <div class="card">
+                <i data-lucide="tractor" size="40"></i>
+                <h3>Modern Farming</h3>
+                <p>Implementing drip irrigation and greenhouse technologies to help small-scale farmers maximize their yields.</p>
+            </div>
+            <div class="card">
+                <i data-lucide="graduation-cap" size="40"></i>
+                <h3>Youth Training</h3>
+                <p>Equipping the next generation with green skills and agribusiness knowledge to combat unemployment.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="carousel-container">
+    <h2 class="section-title">Visualizing Our Impact</h2>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=1200&q=80">
+            <div class="slide-content"><h3>Sustainable Gardening</h3><p>Community projects in Nairobi</p></div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1200&q=80">
+            <div class="slide-content"><h3>Organic Farming</h3><p>High-yield eco-friendly solutions</p></div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div>
+      <div class="logo" style="color:white; margin-bottom:1rem;">
+        <div class="logo-icon" style="background:rgba(255,255,255,0.1); border-color:white; color:white;"><i data-lucide="leaf"></i></div>
+        <span>DAUDI GREENS</span>
+      </div>
+      <p style="font-size:0.9rem; opacity:0.8;">Home of cise effective & highly profitable productivity, modern and practical agriculture</p>
+      <div class="social-icons">
+        <a href="#" class="social-circle"><i data-lucide="facebook" size="18"></i></a>
+        <a href="#" class="social-circle"><i data-lucide="instagram" size="18"></i></a>
+        <a href="#" class="social-circle"><i data-lucide="twitter" size="18"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <br>
+      <a href="about.html" class="footer-link">About DGF</a>
+      <a href="services.html" class="footer-link">Our Services</a>
+      <a href="gallery.html" class="footer-link">Project Gallery</a>
+    </div>
+    <div>
+      <h4>Contact Info</h4>
+      <br>
+      <div class="footer-link"><i data-lucide="mail" size="16"></i> info@daudigreens.org</div>
+      <div class="footer-link"><i data-lucide="phone" size="16"></i> +254 700 000 000</div>
+      <div class="footer-link"><i data-lucide="map-pin" size="16"></i> Nairobi, Kenya</div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/254700000000" class="whatsapp-btn" target="_blank">
+    <i data-lucide="message-circle"></i> Chat on WhatsApp
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    lucide.createIcons();
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+        const spans = hamburger.querySelectorAll('span');
+        if(navLinks.classList.contains('show')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+
+    const swiper = new Swiper(".mySwiper", {
+      loop: true,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      autoplay: { delay: 4000 }
+    });
+</script>
+</body>
+</html>

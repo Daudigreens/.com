@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daudi Greens Foundation (DGF)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Poppins', sans-serif; background:#f7f9f6; color:#333; overflow-x: hidden; }
+
+        /* --- Navbar --- */
+        header { position: sticky; top:0; z-index:1000; background:white; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 15px rgba(0,0,0,0.05); }
+        
+        .logo { display:flex; align-items:center; font-weight:800; font-size:1.4rem; color:#1b5e20; text-decoration:none; gap:10px; }
+        .logo-icon { width: 40px; height: 40px; background: #e8f5e9; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 2px solid #2e7d32; color: #2e7d32; }
+        
+        nav ul { list-style:none; display:flex; gap:2rem; align-items: center; }
+        nav ul li a { text-decoration:none; color:#555; font-weight:600; transition: 0.3s; font-size: 0.95rem; }
+        nav ul li a:hover, nav ul li a.active { color:#2e7d32; }
+
+        /* --- Hamburger Menu --- */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1100; }
+        .hamburger span { width: 28px; height: 3px; background: #1b5e20; border-radius: 2px; transition: 0.3s; }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            nav ul { 
+                position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; 
+                background: white; flex-direction: column; justify-content: center; 
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s ease; 
+            }
+            nav ul.show { right: 0; }
+        }
+
+        /* --- Hero --- */
+        .hero { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:8rem 2rem; background: linear-gradient(rgba(27, 94, 32, 0.8), rgba(27, 94, 32, 0.8)), url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; color:white; }
+        .hero h1 { font-size:3rem; margin-bottom:1rem; }
+        .hero p { font-size:1.1rem; max-width:700px; margin-bottom:2rem; }
+        .btn { background:#ffffff; color:#1b5e20; padding:0.8rem 2rem; border-radius:50px; font-weight:700; text-decoration:none; transition: 0.3s; }
+        .btn:hover { background:#2e7d32; color:white; }
+
+        /* --- Carousel --- */
+        .carousel-container { max-width: 1100px; margin: 4rem auto; padding: 0 1rem; }
+        .swiper { width: 100%; height: 400px; border-radius: 15px; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; }
+
+        /* --- Footer --- */
+        footer { background:#1b5e20; color:white; padding:3rem 2rem; }
+        .footer-container { max-width:1100px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; }
+        .footer-link { color:#e8f5e9; text-decoration:none; display:flex; align-items:center; gap:8px; margin-bottom: 10px; }
+        .social-icons { display: flex; gap: 12px; margin-top: 10px; }
+        .social-circle { width: 35px; height: 35px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: 0.3s; }
+        .social-circle:hover { background: #4caf50; }
+
+        /* WhatsApp */
+        .whatsapp-btn { position:fixed; bottom:25px; right:25px; background:#25d366; color:white; padding:10px 20px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 5px 15px rgba(0,0,0,0.2); z-index: 1001; display:flex; align-items:center; gap:8px; }
+    </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon"><i data-lucide="leaf"></i></div>
+    <span>DAUDI <span style="color:#4caf50;">GREENS</span></span>
+  </a>
+
+  <nav>
+    <ul id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Nurturing Nature, Empowering Lives</h1>
+  <p>Daudi Greens Foundation is dedicated to sustainable environmental conservation and innovative agricultural practices across Kenya.</p>
+  <a href="contact.html" class="btn">Get in Touch</a>
+</section>
+
+<section class="carousel-container">
+    <h2 style="text-align:center; margin-bottom:2rem; color:#1b5e20;">Featured Projects</h2>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=1200&q=80">
+            <div class="slide-content"><h3>Sustainable Gardening</h3><p>Community projects in Nairobi</p></div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1200&q=80">
+            <div class="slide-content"><h3>Organic Farming</h3><p>High-yield eco-friendly solutions</p></div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div>
+      <h4>DGF Africa</h4>
+      <p style="font-size:0.9rem; opacity:0.8; margin-top:10px;">Leading the way in green initiatives and sustainable land management.</p>
+      <div class="social-icons">
+        <a href="#" class="social-circle"><i data-lucide="facebook" size="16"></i></a>
+        <a href="#" class="social-circle"><i data-lucide="instagram" size="16"></i></a>
+        <a href="#" class="social-circle"><i data-lucide="twitter" size="16"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <div class="footer-link"><i data-lucide="mail" size="16"></i> info@daudigreens.org</div>
+      <div class="footer-link"><i data-lucide="phone" size="16"></i> +254 700 000 000</div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/254700000000" class="whatsapp-btn" target="_blank">
+    <i data-lucide="message-circle"></i> WhatsApp
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    lucide.createIcons();
+
+    // Fix Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+        // Simple animation for hamburger
+        const spans = hamburger.querySelectorAll('span');
+        spans[0].style.transform = navLinks.classList.contains('show') ? 'rotate(45deg) translate(5px, 6px)' : 'none';
+        spans[1].style.opacity = navLinks.classList.contains('show') ? '0' : '1';
+        spans[2].style.transform = navLinks.classList.contains('show') ? 'rotate(-45deg) translate(5px, -6px)' : 'none';
+    });
+
+    const swiper = new Swiper(".mySwiper", {
+      loop: true,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      autoplay: { delay: 3000 }
+    });
+</script>
+</body>
+</html>
